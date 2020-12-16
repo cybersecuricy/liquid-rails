@@ -5,9 +5,9 @@ module Liquid
         extend ActiveSupport::Concern
 
         def setup_view_and_controller
-          @view                 = ActionView::Base.new
+          @view                 = ActionView::Base.with_empty_template_cache.with_view_paths([], {})
           @controller           = ActionController::Base.new
-          @request              = ActionDispatch::TestRequest.new({'PATH_INFO' => '/'})
+          @request              = ActionDispatch::TestRequest.new('PATH_INFO' => '/')
           @response             = ActionDispatch::TestResponse.new
           @response.request     = @request
           @controller.request   = @request
